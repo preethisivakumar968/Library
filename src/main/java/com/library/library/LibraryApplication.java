@@ -31,9 +31,13 @@ public class LibraryApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws FileNotFoundException {
 
-	    List<Books> bookList = new CsvToBeanBuilder(new FileReader("/Users/balajimurugesan/preethiproject/Library/src/main/java/com/library/library/files/books.csv")).withType(Books.class).build().parse();
-	    List<Borrower> borrowerList = new CsvToBeanBuilder(new FileReader("/Users/balajimurugesan/preethiproject/Library/src/main/java/com/library/library/files/borrowed.csv")).withType(Borrower.class).build().parse();
-	    List<User> userList = new CsvToBeanBuilder(new FileReader("/Users/balajimurugesan/preethiproject/Library/src/main/java/com/library/library/files/user.csv")).withType(User.class).build().parse();
+		String bookListFilePath = System.getProperty("user.dir") + "/src/main/resources/files/books.csv";
+		String borrowerListFilePath = System.getProperty("user.dir") + "/src/main/resources/files/borrowed.csv";
+		String userListFilePath = System.getProperty("user.dir") + "/src/main/resources/files/user.csv";
+
+	    List<Books> bookList = new CsvToBeanBuilder(new FileReader(bookListFilePath)).withType(Books.class).build().parse();
+	    List<Borrower> borrowerList = new CsvToBeanBuilder(new FileReader(borrowerListFilePath)).withType(Borrower.class).build().parse();
+	    List<User> userList = new CsvToBeanBuilder(new FileReader(userListFilePath)).withType(User.class).build().parse();
 	    
 	    BookData bookData = new BookData(bookList);
 	    BorrowersData borrowersData = new BorrowersData(borrowerList);
